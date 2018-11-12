@@ -4,9 +4,9 @@ import { Provider } from 'react-redux'
 import { createStore} from 'redux'
 import firebase from '@firebase/app' //eslint-disable-line
 import reducers from './reducers'
+import LoginForm from './components/LoginForm'
 
 class App extends Component {
-
   componentWillMount() {
     const config = {
       apiKey: 'AIzaSyAXmdy5DuF1DmA8V_Z_LYuuqRXsn4681_w',
@@ -22,9 +22,7 @@ class App extends Component {
   render() {
     return (
       <Provider store={ createStore(reducers) }>
-        <View>
-          <Text>Hello!</Text>
-        </View>
+        <LoginForm />
       </Provider>
     )
   }
