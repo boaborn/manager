@@ -25,7 +25,6 @@
     "no-multiple-empty-lines": ["error", {"max": 1}],
     "comma-spacing": ["error", { "before": false, "after": true }],
     "react/jsx-curly-spacing": ["error", {"when": "always", "children": true}],
-
     "comma-dangle": ["error", "never"],
     "react/jsx-indent": ["error", 2],
     "camelcase": 0,
