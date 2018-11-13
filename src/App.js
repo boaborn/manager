@@ -6,6 +6,7 @@ import firebase from '@firebase/app' //eslint-disable-line
 import reducers from './reducers'
 import LoginForm from './components/LoginForm'
 
+console.disableYellowBox = true
 class App extends Component {
   componentWillMount() {
     const config = {
