@@ -1,9 +1,14 @@
 import React, { Component } from 'react'
+import {View, Text} from 'react-native'
 import { connect } from 'react-redux'
-import { Card, Input, CardSection, Button } from './common'
+import { Card, Input, CardSection, Button, Spinner } from './common'
 import { emailChanged, passwordChanged, loginUser } from '../actions'
 
 class LoginForm extends Component {
+  componentDidMount() {
+    this.props.loginUser({email: 'test@test.com', password: 'password'})
+  }
+
   onEmailChange(text) {
     this.props.emailChanged(text) //action creater
   }
@@ -15,6 +20,28 @@ class LoginForm extends Component {
   onButtonPress() {
     const {email, password} = this.props
     this.props.loginUser({email, password})
+  }
+
+  renderError() {
+    if (this.props.error) {
+      return (
+        <View style={ {backgroundColor: 'white'} }>
+          <Text style={ styles.errorTextStyle }>
+            { this.props.error }
+          </Text>
+        </View>
+      )
+    }
+  }
+  
+  renderButton() {
+    if (this.props.loading) {
+      return (<Spinner size="large" />)
+    }
+    
+    return (
+      <Button onPress={ this.onButtonPress.bind(this) }>Login</Button>
+    )
   }
 
   render() {
@@ -38,18 +65,28 @@ class LoginForm extends Component {
             onChangeText={ this.onPasswordChange.bind(this) }
           />
         </CardSection>
+        { this.renderError() }
         <CardSection>
-          <Button onPress={ this.onButtonPress.bind(this) }>Login</Button>
+          { this.renderButton() }
         </CardSection>
       </Card>
     )
   }
 }
 
+const styles = {
+  errorTextStyle: {
+    fontSize: 20,
+    alignSelf: 'center',
+    color: 'red'
+  }
+}
 //connect hooks up action creator and pass it as props
 const mapStateToProps = state => ({
   email: state.auth.email,
-  password: state.auth.password
+  password: state.auth.password,
+  error: state.auth.error,
+  loading: state.auth.loading
 })
 
 export default connect(mapStateToProps, { 

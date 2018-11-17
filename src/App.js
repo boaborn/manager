@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import { Provider } from 'react-redux'
-import { createStore, applyMiddleware} from 'redux'
+import { createStore, applyMiddleware, Text} from 'redux'
 import firebase from '@firebase/app' //eslint-disable-line
 import ReduxThunk from 'redux-thunk'
 import reducers from './reducers'
 import LoginForm from './components/LoginForm'
+import Router from './Router'
 
 console.disableYellowBox = true
 class App extends Component {
@@ -27,7 +28,7 @@ class App extends Component {
     
     return (
       <Provider store={ store }>
-        <LoginForm />
+        <Router /> 
       </Provider>
     )
   }
